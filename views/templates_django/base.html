@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="id">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{% block title %}CBTGaruda{% endblock %}</title>
+
+        <!-- Bootstrap 5 CSS -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+        />
+
+        <!-- Font Awesome for icons -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+
+        {% block extra_css %}{% endblock %}
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Sidebar -->
+                <div
+                    class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse"
+                >
+                    <div class="position-sticky pt-3">
+                        <!-- Logo and Brand -->
+                        <div class="py-2 mb-3 border-bottom text-center">
+                            <a
+                                href="{% url 'accounts:dashboard' %}"
+                                class="text-decoration-none"
+                            >
+                                <h5 class="text-primary">
+                                    <i class="fas fa-graduation-cap me-2"></i
+                                    >CBTGaruda
+                                </h5>
+                                <div class="text-muted small">
+                                    TP: {{ current_academic_year }}
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- User Profile -->
+                        <div class="user-profile text-center mb-3">
+                            <div class="avatar mx-auto mb-2">
+                                <img
+                                    src="{% if user.profile_image %}{{ user.profile_image.url }}{% else %}{% static 'images/default-avatar.png' %}{% endif %}"
+                                    alt="{{ user.full_name }}"
+                                    class="rounded-circle"
+                                    width="60"
+                                    height="60"
+                                />
+                            </div>
+                            <div class="user-info">
+                                <h6 class="mb-0">
+                                    {{ user.full_name|default:user.username }}
+                                </h6>
+                                <span class="text-muted small"
+                                    >{{ user.user_type }}</span
+                                >
+                            </div>
+                        </div>
+
+                        <!-- Navigation Menu -->
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <div class="nav-section-header">HOME</div>
+                            </li>
+                            <li class="nav-item">
+                                <a
+                                    href="{% url 'accounts:dashboard' %}"
+                                    class="nav-link {% if active_menu == 'dashboard' %}active{% endif %}"
+                                >
+                                    <i class="fas fa-tachometer-alt me-2"></i>
+                                    Dashboard
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a
+                                    href="#"
+                                    class="nav-link {% if active_menu == 'data_umum' %}active{% endif %}"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#dataUmumSubmenu"
+                                >
+                                    <i class="fas fa-database me-2"></i> Data
+                                    Umum
+                                    <i
+                                        class="fas fa-chevron-down ms-auto small"
+                                    ></i>
+                                </a>
+                                <div
+                                    class="collapse {% if active_menu == 'data_umum' %}show{% endif %}"
+                                    id="dataUmumSubmenu"
+                                >
+                                    <ul class="nav flex-column sub-menu">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#"
+                                                >Data Siswa</a
+                                            >
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#"
+                                                >Data Guru</a
+                                            >
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a
+                                    href="#"
+                                    class="nav-link {% if active_menu == 'data_ujian' %}active{% endif %}"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#dataUjianSubmenu"
+                                >
+                                    <i class="fas fa-file-alt me-2"></i> Data
+                                    Ujian
+                                    <i
+                                        class="fas fa-chevron-down ms-auto small"
+                                    ></i>
+                                </a>
+                                <div
+                                    class="collapse {% if active_menu == 'data_ujian' %}show{% endif %}"
+                                    id="dataUjianSubmenu"
+                                >
+                                    <ul class="nav flex-column sub-menu">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#"
+                                                >Bank Soal</a
+                                            >
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#"
+                                                >Jadwal Ujian</a
+                                            >
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a
+                                    href="#"
+                                    class="nav-link {% if active_menu == 'pengumuman' %}active{% endif %}"
+                                >
+                                    <i class="fas fa-bullhorn me-2"></i>
+                                    Pengumuman
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <div class="nav-section-header">
+                                    PELAKSANAAN
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a
+                                    href="#"
+                                    class="nav-link {% if active_menu == 'pelaksanaan_ujian' %}active{% endif %}"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#pelaksanaanUjianSubmenu"
+                                >
+                                    <i class="fas fa-tasks me-2"></i>
+                                    Pelaksanaan Ujian
+                                    <i
+                                        class="fas fa-chevron-down ms-auto small"
+                                    ></i>
+                                </a>
+                                <div
+                                    class="collapse {% if active_menu == 'pelaksanaan_ujian' %}show{% endif %}"
+                                    id="pelaksanaanUjianSubmenu"
+                                >
+                                    <ul class="nav flex-column sub-menu">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#"
+                                                >Monitoring</a
+                                            >
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#"
+                                                >Riwayat</a
+                                            >
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+
+                            <li class="nav-item">
+                                <div class="nav-section-header">RAPOR</div>
+                            </li>
+                            <li class="nav-item">
+                                <a
+                                    href="#"
+                                    class="nav-link {% if active_menu == 'setting_rapor' %}active{% endif %}"
+                                >
+                                    <i class="fas fa-cog me-2"></i> Setting
+                                    Rapor
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <div class="nav-section-header">PENGATURAN</div>
+                            </li>
+                            <li class="nav-item">
+                                <a
+                                    href="#"
+                                    class="nav-link {% if active_menu == 'profil_sekolah' %}active{% endif %}"
+                                >
+                                    <i class="fas fa-school me-2"></i> Profil
+                                    Sekolah
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a
+                                    href="#"
+                                    class="nav-link {% if active_menu == 'user_management' %}active{% endif %}"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#userManagementSubmenu"
+                                >
+                                    <i class="fas fa-users me-2"></i> User
+                                    Management
+                                    <i
+                                        class="fas fa-chevron-down ms-auto small"
+                                    ></i>
+                                </a>
+                                <div
+                                    class="collapse {% if active_menu == 'user_management' %}show{% endif %}"
+                                    id="userManagementSubmenu"
+                                >
+                                    <ul class="nav flex-column sub-menu">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#"
+                                                >Daftar Pengguna</a
+                                            >
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#"
+                                                >Tambah Pengguna</a
+                                            >
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+
+                            <li class="nav-item mt-3">
+                                <a
+                                    href="{% url 'accounts:logout' %}"
+                                    class="nav-link text-danger"
+                                >
+                                    <i class="fas fa-sign-out-alt me-2"></i>
+                                    LOGOUT
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Main content -->
+                <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                    <div
+                        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
+                    >
+                        <div class="btn-toolbar mb-2 mb-md-0">
+                            <button
+                                type="button"
+                                class="btn btn-sm btn-outline-secondary d-md-none"
+                                id="sidebarToggle"
+                            >
+                                <i class="fas fa-bars"></i>
+                            </button>
+                            <h1 class="h2 ms-2">
+                                {% block page_title %}Dashboard{% endblock %}
+                            </h1>
+                        </div>
+                        <div class="dropdown">
+                            <button
+                                class="btn btn-secondary dropdown-toggle"
+                                type="button"
+                                id="userMenuDropdown"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                            >
+                                {{ user.full_name|default:user.username }}
+                            </button>
+                            <ul
+                                class="dropdown-menu dropdown-menu-end"
+                                aria-labelledby="userMenuDropdown"
+                            >
+                                <li>
+                                    <a class="dropdown-item" href="#">Profil</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#"
+                                        >Pengaturan</a
+                                    >
+                                </li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li>
+                                    <a
+                                        class="dropdown-item text-danger"
+                                        href="{% url 'accounts:logout' %}"
+                                        >Logout</a
+                                    >
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Alert Messages -->
+                    {% if messages %}
+                    <div class="messages">
+                        {% for message in messages %}
+                        <div
+                            class="alert alert-{{ message.tags }} alert-dismissible fade show"
+                            role="alert"
+                        >
+                            {{ message }}
+                            <button
+                                type="button"
+                                class="btn-close"
+                                data-bs-dismiss="alert"
+                                aria-label="Close"
+                            ></button>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    <!-- Main Content Block -->
+                    <div class="content-wrapper">
+                        {% block content %}{% endblock %}
+                    </div>
+                </main>
+            </div>
+        </div>
+
+        <!-- Bootstrap 5 JS Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+        <!-- Custom JavaScript -->
+        <script src="{% static 'js/main.js' %}"></script>
+
+        {% block extra_js %}{% endblock %}
+    </body>
+</html>

@@ -1,0 +1,271 @@
+{% extends 'base.html' %} {% block title %}Dashboard - CBTGaruda{% endblock %}
+{% block page_title %}Dashboard{% endblock %} {% block content %}
+<div class="container-fluid">
+    <!-- Overview Cards -->
+    <div class="row mb-4">
+        <div class="col-md-3 mb-4">
+            <div class="card border-left-primary h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div
+                                class="text-xs font-weight-bold text-primary text-uppercase mb-1"
+                            >
+                                Total Siswa
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                {{ total_students }}
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-users fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-4">
+            <div class="card border-left-success h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div
+                                class="text-xs font-weight-bold text-success text-uppercase mb-1"
+                            >
+                                Total Guru
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                {{ total_teachers }}
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i
+                                class="fas fa-chalkboard-teacher fa-2x text-gray-300"
+                            ></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-4">
+            <div class="card border-left-info h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div
+                                class="text-xs font-weight-bold text-info text-uppercase mb-1"
+                            >
+                                Bank Soal
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                {{ total_question_banks }}
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i
+                                class="fas fa-clipboard-list fa-2x text-gray-300"
+                            ></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-4">
+            <div class="card border-left-warning h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div
+                                class="text-xs font-weight-bold text-warning text-uppercase mb-1"
+                            >
+                                Jadwal Ujian
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                {{ total_exam_schedules }}
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Upcoming Exams & Recent Activities -->
+    <div class="row">
+        <!-- Upcoming Exams -->
+        <div class="col-md-6 mb-4">
+            <div class="card shadow mb-4">
+                <div
+                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between"
+                >
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        Jadwal Ujian Mendatang
+                    </h6>
+                    <div class="dropdown no-arrow">
+                        <a
+                            class="dropdown-toggle"
+                            href="#"
+                            role="button"
+                            id="dropdownMenuLink"
+                            data-bs-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                        >
+                            <i
+                                class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"
+                            ></i>
+                        </a>
+                        <div
+                            class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                            aria-labelledby="dropdownMenuLink"
+                        >
+                            <div class="dropdown-header">Aksi:</div>
+                            <a class="dropdown-item" href="#">Lihat Semua</a>
+                            <a class="dropdown-item" href="#">Tambah Jadwal</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    {% if upcoming_exams %}
+                    <div class="table-responsive">
+                        <table
+                            class="table table-bordered"
+                            width="100%"
+                            cellspacing="0"
+                        >
+                            <thead>
+                                <tr>
+                                    <th>Ujian</th>
+                                    <th>Kelas</th>
+                                    <th>Tanggal</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for exam in upcoming_exams %}
+                                <tr>
+                                    <td>{{ exam.name }}</td>
+                                    <td>{{ exam.class }}</td>
+                                    <td>{{ exam.date }}</td>
+                                    <td>
+                                        <span
+                                            class="badge bg-{{ exam.status_color }}"
+                                            >{{ exam.status }}</span
+                                        >
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% else %}
+                    <div class="text-center py-4">
+                        <i
+                            class="fas fa-calendar-times fa-3x mb-3 text-gray-300"
+                        ></i>
+                        <p class="mb-0">Tidak ada jadwal ujian mendatang</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Activities -->
+        <div class="col-md-6 mb-4">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        Aktivitas Terbaru
+                    </h6>
+                </div>
+                <div class="card-body">
+                    {% if recent_activities %}
+                    <div class="activities-list">
+                        {% for activity in recent_activities %}
+                        <div class="activity-item d-flex mb-3">
+                            <div class="activity-icon me-3">
+                                <span
+                                    class="rounded-circle bg-{{ activity.icon_color }} text-white"
+                                >
+                                    <i class="fas fa-{{ activity.icon }}"></i>
+                                </span>
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-title">
+                                    {{ activity.title }}
+                                </div>
+                                <div class="text-muted small">
+                                    {{ activity.timestamp }}
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <div class="text-center py-4">
+                        <i class="fas fa-stream fa-3x mb-3 text-gray-300"></i>
+                        <p class="mb-0">Tidak ada aktivitas terbaru</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Announcement Section -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card shadow mb-4">
+                <div
+                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between"
+                >
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        Pengumuman
+                    </h6>
+                    {% if user.is_staff %}
+                    <a href="#" class="btn btn-sm btn-primary">
+                        <i class="fas fa-plus"></i> Buat Pengumuman
+                    </a>
+                    {% endif %}
+                </div>
+                <div class="card-body">
+                    {% if announcements %} {% for announcement in announcements
+                    %}
+                    <div class="announcement-item mb-3 p-3 border-bottom">
+                        <h5>{{ announcement.title }}</h5>
+                        <div class="text-muted small mb-2">
+                            <i class="fas fa-user me-1"></i> {{
+                            announcement.author }} |
+                            <i class="fas fa-calendar me-1"></i> {{
+                            announcement.date }}
+                        </div>
+                        <div class="announcement-content">
+                            {{ announcement.content }}
+                        </div>
+                    </div>
+                    {% endfor %} {% else %}
+                    <div class="text-center py-4">
+                        <i class="fas fa-bullhorn fa-3x mb-3 text-gray-300"></i>
+                        <p class="mb-0">Tidak ada pengumuman saat ini</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} {% block extra_js %}
+<script>
+    // Dashboard specific JavaScript will go here
+    document.addEventListener("DOMContentLoaded", function () {
+        console.log("Dashboard loaded");
+        // Additional dashboard functionality can be added here
+    });
+</script>
+{% endblock %}
