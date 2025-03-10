@@ -1,0 +1,119 @@
+/* Login Page Specific Styles */
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.container {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.card {
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.card-body {
+    padding: 0;
+}
+
+.fas.fa-graduation-cap {
+    color: #4e73df;
+}
+
+/* Form styles */
+.form-label {
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+}
+
+.input-group-text {
+    background-color: #f8f9fc;
+    border-right: none;
+}
+
+.form-control {
+    border-left: none;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #ced4da;
+}
+
+.input-group .form-control:focus ~ .input-group-text {
+    border-color: #ced4da;
+}
+
+.btn-primary {
+    background-color: #4e73df;
+    border-color: #4e73df;
+    padding: 0.6rem;
+    font-weight: 500;
+}
+
+.btn-primary:hover {
+    background-color: #2e59d9;
+    border-color: #2653d4;
+}
+
+/* Toggle password button */
+#togglePassword {
+    border-left: none;
+    background-color: #fff;
+    border-color: #ced4da;
+}
+
+#togglePassword:hover {
+    background-color: #f8f9fa;
+}
+
+/* Forgot password link */
+a {
+    color: #4e73df;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #2e59d9;
+    text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+    .card {
+        border-radius: 0;
+        box-shadow: none;
+        margin: 0 !important;
+    }
+
+    .container {
+        padding: 0;
+    }
+}
+
+/* Animation for alerts */
+.alert {
+    animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Footer text */
+.text-muted {
+    color: #858796 !important;
+}

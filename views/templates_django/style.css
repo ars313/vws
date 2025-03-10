@@ -1,0 +1,185 @@
+/* Main Layout Styles */
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    padding: 0;
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+    background-color: #fff;
+}
+
+.sidebar .position-sticky {
+    height: 100vh;
+    overflow-y: auto;
+}
+
+/* Sidebar Header */
+.sidebar .py-2 {
+    border-bottom: 1px solid #e3e6f0;
+}
+
+/* User Profile in Sidebar */
+.user-profile .avatar img {
+    border: 3px solid #e3e6f0;
+    box-shadow: 0 0.15rem 0.5rem rgba(58, 59, 69, 0.15);
+}
+
+.user-info h6 {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+/* Navigation Section Headers */
+.nav-section-header {
+    padding: 0.75rem 1rem 0.5rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #b7b9cc;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+/* Navigation Links */
+.nav-link {
+    color: #3a3b45;
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+    border-radius: 0;
+}
+
+.nav-link:hover {
+    color: #007bff;
+    background-color: #f8f9fc;
+}
+
+.nav-link.active {
+    color: #007bff;
+    background-color: #eaecf4;
+    font-weight: 600;
+}
+
+/* Submenu Styles */
+.sub-menu {
+    padding-left: 2.25rem;
+}
+
+.sub-menu .nav-link {
+    font-size: 0.85rem;
+    padding: 0.35rem 0;
+}
+
+/* Main Content Area */
+main {
+    padding-top: 1.5rem;
+    padding-bottom: 2rem;
+}
+
+.content-wrapper {
+    padding: 1.5rem 0;
+}
+
+/* Card Styles */
+.card {
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.1);
+    border: none;
+    border-radius: 0.35rem;
+}
+
+.card-header {
+    background-color: #f8f9fc;
+    border-bottom: 1px solid #e3e6f0;
+}
+
+/* Card Border Styles */
+.border-left-primary,
+.border-left-success,
+.border-left-info,
+.border-left-warning {
+    border-left: 0.25rem solid;
+}
+
+.border-left-primary {
+    border-left-color: #4e73df;
+}
+
+.border-left-success {
+    border-left-color: #1cc88a;
+}
+
+.border-left-info {
+    border-left-color: #36b9cc;
+}
+
+.border-left-warning {
+    border-left-color: #f6c23e;
+}
+
+/* Text Colors */
+.text-gray-300 {
+    color: #dddfeb;
+}
+
+.text-gray-800 {
+    color: #5a5c69;
+}
+
+/* Activities List */
+.activities-list .activity-icon span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+}
+
+/* Announcement Item */
+.announcement-item {
+    border-bottom: 1px solid #e3e6f0;
+    padding-bottom: 1rem;
+}
+
+.announcement-item:last-child {
+    border-bottom: none;
+}
+
+/* PDF Viewer Styles */
+.pdf-controls {
+    background-color: #f8f9fa;
+    border-radius: 50px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 5px 10px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.pdf-controls button {
+    background: none;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 767.98px) {
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        max-width: 250px;
+        transition: all 0.3s;
+        z-index: 1050;
+    }
+
+    .sidebar.show {
+        left: 0;
+    }
+}
